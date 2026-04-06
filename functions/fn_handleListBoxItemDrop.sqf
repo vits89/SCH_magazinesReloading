@@ -31,7 +31,6 @@ if ((_magazineForInsertingAmmo isEqualTo []) or { _magazineForRemovingAmmo isEqu
 [
 	_magazineForInsertingAmmo,
 	_magazineForRemovingAmmo,
-	[_control] call SCH_magazinesReloading_fnc_getEquipmentContainer
-] call SCH_magazinesReloading_fnc_reloadMagazines;
-
-_display setVariable ["SCH_magazinesReloading_var_magazineInfo", nil];
+	[_control] call SCH_magazinesReloading_fnc_getEquipmentContainer,
+	_display
+] spawn SCH_magazinesReloading_fnc_reloadMagazines;
