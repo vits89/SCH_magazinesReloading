@@ -29,6 +29,10 @@ private _container = [_control] call SCH_magazinesReloading_fnc_getEquipmentCont
 
 if (isNull _container) exitWith { _magazineInfo };
 
+private _magazines = (magazinesAmmoCargo _container) select { (_x select 0) == _className };
+
+if ((count _magazines) == 0) exitWith { _magazineInfo };
+
 privateAll;
 
 _indices = [];
@@ -39,14 +43,45 @@ for "_i" from 0 to (_itemsCount - 1) do {
 	};
 };
 
-_magazines = (magazinesAmmoCargo _container) select { (_x select 0) == _className };
+_index = _indices find _index;
 
-if ((count _magazines) == 0) exitWith { _magazineInfo };
+_magazineCounts = createHashMapFromArray (_magazines call BIS_fnc_consolidateArray);
 
-_magazines = (_magazines call BIS_fnc_consolidateArray) apply { flatten _x };
+_magazineAmmoCounts = createHashMap;
 
-_magazines sort false;
+{
+	_className = _x select 0;
+	_ammoCount = _x select 1;
 
-_magazineInfo = _magazines select (_indices find _index);
+	(_magazineAmmoCounts getOrDefault [_className, [], true]) pushBack _ammoCount;
+} forEach (keys _magazineCounts);
 
-[_magazineInfo select 0, _magazineInfo select 2, _magazineInfo select 1]
+_magazinesConfig = configFile >> "CfgMagazines";
+
+_magazineNames = [];
+
+{
+	_y sort false;
+
+	_magazineNames pushBack [getText (_magazinesConfig >> _x >> "displayName"), _x];
+} forEach _magazineAmmoCounts;
+
+_magazineNames sort true;
+
+_i = 0;
+
+{
+	_className = _x select 1;
+
+	{
+		if (_i == _index) exitWith {
+			_magazineInfo = [_className, _magazineCounts get [_className, _x], _x];
+		};
+
+		_i = _i + 1;
+	} forEach (_magazineAmmoCounts get _className);
+
+	if (_magazineInfo isNotEqualTo []) exitWith { };
+} forEach _magazineNames;
+
+_magazineInfo
