@@ -73,15 +73,16 @@ _i = 0;
 {
 	_className = _x select 1;
 
-	{
-		if (_i == _index) exitWith {
-			_magazineInfo = [_className, _magazineCounts get [_className, _x], _x];
-		};
+	_ammoCounts = _magazineAmmoCounts get _className;
+	_ammoCountsCount = count _ammoCounts;
 
-		_i = _i + 1;
-	} forEach (_magazineAmmoCounts get _className);
+	if (_index < (_i + _ammoCountsCount)) exitWith {
+		_ammoCount = _ammoCounts select (_index - _i);
 
-	if (_magazineInfo isNotEqualTo []) exitWith { };
+		_magazineInfo = [_className, _magazineCounts get [_className, _ammoCount], _ammoCount];
+	};
+
+	_i = _i + _ammoCountsCount;
 } forEach _magazineNames;
 
 _magazineInfo
