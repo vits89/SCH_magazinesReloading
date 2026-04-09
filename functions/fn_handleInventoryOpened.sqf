@@ -1,5 +1,13 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+if (!hasInterface) exitWith { false };
+
+params [
+	["_unit", objNull, [objNull]]
+];
+
+if (isNull _unit) exitWith { false };
+
 [] spawn {
 	_display = displayNull;
 
@@ -15,5 +23,7 @@
 		[["SCH_magazinesReloading", "Info"]] call BIS_fnc_advHint;
 	};
 };
+
+_unit removeEventHandler [_thisEvent, _thisEventHandler];
 
 false
