@@ -7,9 +7,11 @@ class SCH_magazinesReloading
 		file = __EVAL(PATH + "functions");
 
 		class checkIfMagazinesAreCompatible { };
+		class createProgressBar { };
 		class getEquipmentContainer { };
 		class getListBoxItemIndex { };
 		class getMagazineInfo { };
+		class lockInventory { };
 		class reloadMagazines { };
 
 		class handleInventoryOpened { };
