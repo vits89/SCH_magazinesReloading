@@ -2,6 +2,10 @@
 
 This is a scripted solution for reloading magazines for [Arma 3](https://arma3.com). It extends the standard inventory interface and requires nothing additional. To reload, simply drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Magazines must be in the same player's equipment.
 
+## Demo mission
+
+Demo mission can be downloaded from [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3701411741).
+
 ## Installation
 
 - Copy the solution to your mission, for example, to *client\addons\SCH_magazinesReloading* folder.
