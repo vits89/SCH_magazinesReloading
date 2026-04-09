@@ -1,6 +1,6 @@
 #include "..\definitions.hpp"
 
-if (!canSuspend) exitWith { };
+if (!canSuspend) exitWith { scriptNull };
 
 params [
     ["_magazineForInsertingAmmo", [], [[]], 3],
