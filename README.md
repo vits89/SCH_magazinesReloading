@@ -23,10 +23,6 @@ class CfgHints
 };
 ```
 - Move localization resources from the solution's *stringtable.xml* file to your mission's one.
-- Call the main solution file when starting your mission, for example, in *initPlayerLocal.sqf* file:
-```sqf
-call (compileScript ["client\addons\SCH_magazinesReloading\main.sqf"]);
-```
 
 ## Support
 
