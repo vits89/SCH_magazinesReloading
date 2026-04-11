@@ -9,12 +9,6 @@ if ((isNull _control) or { _listBoxIdc < 0 }) exitWith { };
 
 _display = ctrlParent _control;
 
-_display setVariable ["SCH_magazinesReloading_var_isDragging", false];
-
-_control spawn {
-	ctrlDelete _this;
-};
-
 _control = _display displayCtrl _listBoxIdc;
 
 _itemHeight = getNumber (configFile >> "RscDisplayInventory" >> "Controls" >> (ctrlClassName _control) >> "rowHeight");

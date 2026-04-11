@@ -12,13 +12,16 @@ player addEventHandler ["InventoryOpened", { call SCH_magazinesReloading_fnc_han
 
 		if (_className != "RscDisplayInventory") exitWith { };
 
-		_display displayAddEventHandler ["MouseButtonUp", { call SCH_magazinesReloading_fnc_handleMouseButtonUp; }];
-
 		{
-			_control = _display displayCtrl _x;
-
-			_control ctrlAddEventHandler ["LBDrag", { call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }];
-			// _control ctrlAddEventHandler ["LBDrop", { call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }]; // Currently doesn't work
+			(_display displayCtrl _x) ctrlAddEventHandler [
+				"LBDrag",
+				{ call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }
+			];
 		} forEach [IDC_FG_UNIFORM_CONTAINER, IDC_FG_VEST_CONTAINER, IDC_FG_BACKPACK_CONTAINER];
+
+		(_display displayCtrl IDC_FG_CONTAINER_MARKER) ctrlAddEventHandler [
+			"LBDrop",
+			{ call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }
+		];
 	}
 ] call BIS_fnc_addScriptedEventHandler;
