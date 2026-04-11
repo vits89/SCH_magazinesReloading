@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="SCH_magazinesReloading">
-	<Package name="SCH_magazinesReloading">
-		<Container name="Hints">
-			<Key ID="STR_SCH_magazinesReloading_hint_title">
-				<Original>Magazines reloading</Original>
-				<English>Magazines reloading</English>
-				<Russian>Снаряжение магазинов</Russian>
-			</Key>
-			<Key ID="STR_SCH_magazinesReloading_hint_description">
-				<Original>You can reload magazines. To do this, drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</Original>
-				<English>You can reload magazines. To do this, drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</English>
-				<Russian>Ты можешь снаряжать магазины. Для этого перетащи магазин, из которого будут вытаскиваться патроны, на магазин, в который будут вставляться патроны. Оба магазина должны быть в одном снаряжении игрока.</Russian>
-			</Key>
-		</Container>
-	</Package>
+	<Container name="Hints">
+		<Key ID="STR_SCH_magazinesReloading_hint_title">
+			<Original>Magazines reloading</Original>
+			<English>Magazines reloading</English>
+			<Russian>Снаряжение магазинов</Russian>
+		</Key>
+		<Key ID="STR_SCH_magazinesReloading_hint_description">
+			<Original>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</Original>
+			<English>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</English>
+			<Russian>Ты можешь снаряжать магазины. Для этого в инвентаре перетащи магазин, из которого будут вытаскиваться патроны, на магазин, в который будут вставляться патроны. Оба магазина должны быть в одном снаряжении игрока.</Russian>
+		</Key>
+	</Container>
 </Project>
