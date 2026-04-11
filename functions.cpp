@@ -17,6 +17,5 @@ class SCH_magazinesReloading
 		class handleInventoryOpened { };
 		class handleListBoxItemDrag { };
 		class handleListBoxItemDrop { };
-		class handleMouseButtonUp { };
 	};
 };
