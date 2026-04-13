@@ -1,3 +1,10 @@
+v1.2.0
+
+Added: implemented the mod.
+Added: implemented autostart.
+Changed: updated the hint.
+
+
 v1.1.0
 
 Added: a delay when reloading magazines.

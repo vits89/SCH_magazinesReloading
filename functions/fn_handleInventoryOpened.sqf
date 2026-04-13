@@ -21,7 +21,7 @@ if (isNull _unit) exitWith { false };
 
 	if (isNull _display) exitWith { };
 
-	[["SCH_magazinesReloading", "Info"], nil, nil, nil, nil, nil, nil, true] call BIS_fnc_advHint;
+	[["Weapons_basic", "SCH_magazinesReloading"], nil, nil, nil, nil, nil, nil, true] call BIS_fnc_advHint;
 };
 
 false

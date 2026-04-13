@@ -1,6 +1,6 @@
-class SCH_magazinesReloading
+class Weapons_basic
 {
-	class Info
+	class SCH_magazinesReloading
 	{
 		displayName = "$STR_SCH_magazinesReloading_hint_title";
 		description = "$STR_SCH_magazinesReloading_hint_description";
