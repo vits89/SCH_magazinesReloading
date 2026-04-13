@@ -1,0 +1,15 @@
+v1.1.0
+
+Added: a delay when reloading magazines.
+Changed: made the hint to be one-time per mission.
+Changed: optimized a script.
+
+
+v1.0.1
+
+Fixed: incorrect determining of magazines when drag & drop.
+
+
+v1.0.0
+
+The first release.
