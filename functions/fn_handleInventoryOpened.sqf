@@ -19,11 +19,9 @@ if (isNull _unit) exitWith { false };
 		!(isNull _display) or { time >= _time }
 	};
 
-	if (!(isNull _display)) then {
-		[["SCH_magazinesReloading", "Info"]] call BIS_fnc_advHint;
-	};
-};
+	if (isNull _display) exitWith { };
 
-_unit removeEventHandler [_thisEvent, _thisEventHandler];
+	[["Weapons_basic", "SCH_magazinesReloading"], nil, nil, nil, nil, nil, nil, true] call BIS_fnc_advHint;
+};
 
 false
