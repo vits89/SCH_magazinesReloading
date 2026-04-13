@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="SCH_magazinesReloading">
+	<Container name="About">
+		<Key ID="STR_SCH_magazinesReloading_about_name">
+			<Original>Magazines Reloading</Original>
+			<English>Magazines Reloading</English>
+			<Russian>Снаряжение магазинов</Russian>
+		</Key>
+		<Key ID="STR_SCH_magazinesReloading_about_overview">
+			<Original>A solution for reloading magazines. It extends the standard inventory interface and has no dependencies.</Original>
+			<English>A solution for reloading magazines. It extends the standard inventory interface and has no dependencies.</English>
+			<Russian>Решение для снаряжения магазинов. Оно расширяет стандартный интерфейс инвентаря и не имеет зависимостей.</Russian>
+		</Key>
+	</Container>
 	<Container name="Hints">
 		<Key ID="STR_SCH_magazinesReloading_hint_title">
 			<Original>Magazines reloading</Original>
@@ -7,8 +19,8 @@
 			<Russian>Снаряжение магазинов</Russian>
 		</Key>
 		<Key ID="STR_SCH_magazinesReloading_hint_description">
-			<Original>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</Original>
-			<English>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed onto a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</English>
+			<Original>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</Original>
+			<English>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</English>
 			<Russian>Ты можешь снаряжать магазины. Для этого в инвентаре перетащи магазин, из которого будут вытаскиваться патроны, на магазин, в который будут вставляться патроны. Оба магазина должны быть в одном снаряжении игрока.</Russian>
 		</Key>
 	</Container>
