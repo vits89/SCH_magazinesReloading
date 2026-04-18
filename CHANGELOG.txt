@@ -1,3 +1,10 @@
+v1.2.1
+
+Added: logo.
+Added: compiled scripts.
+Changed: optimized scripts.
+
+
 v1.2.0
 
 Added: implemented the mod.
