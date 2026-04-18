@@ -16,7 +16,7 @@ To use the mod, simply subscribe to it on [Steam Workshop](https://steamcommunit
 
 ### Scripts
 
-If you want to built-in the solution to your mission, then:
+If you want to add the solution to your mission, then:
 - Copy the solution to the mission, for example, to *client\addons\SCH_magazinesReloading* folder.
 - Change the path to the solution in the `PATH` definition in *definitions.hpp* file, for example, to `"client\addons\SCH_magazinesReloading\"`.
 - Include the solution files in `CfgFunctions` and `CfgHints` classes in *description.ext* file:

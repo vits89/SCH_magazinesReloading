@@ -1,3 +1,0 @@
-Copyright 2026 Schatten
-
-This work is released under [Arma Public License Share Alike (APL-SA) license](https://www.bohemia.net/community/licenses/arma-public-license-share-alike).
