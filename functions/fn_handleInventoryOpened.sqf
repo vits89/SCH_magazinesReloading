@@ -2,12 +2,6 @@
 
 if (!hasInterface) exitWith { false };
 
-params [
-	["_unit", objNull, [objNull]]
-];
-
-if (isNull _unit) exitWith { false };
-
 [] spawn {
 	_display = displayNull;
 
