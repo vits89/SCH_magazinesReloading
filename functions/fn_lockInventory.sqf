@@ -3,10 +3,13 @@
 #include "..\definitions.hpp"
 
 params [
-	["_lock", true, [true]]
+	["_lock", true, [true]],
+	["_display", displayNull, [displayNull]]
 ];
 
-private _display = findDisplay IDD_FUTURAGEAR;
+if (isNull _display) then {
+	_display = findDisplay IDD_FUTURAGEAR;
+};
 
 if (isNull _display) exitWith { false };
 

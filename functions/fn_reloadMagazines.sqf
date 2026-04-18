@@ -47,7 +47,7 @@ _progressInc = PROGRESS_UPDATE_PERIOD / (SECONDS_PER_ROUND * _ammoCount);
 
 localNamespace setVariable ["SCH_magazinesReloading_var_isReloading", true];
 
-[] call SCH_magazinesReloading_fnc_lockInventory;
+[true, _display] call SCH_magazinesReloading_fnc_lockInventory;
 
 _controls = [_display] call SCH_magazinesReloading_fnc_createProgressBar;
 
@@ -100,7 +100,7 @@ if (!(isNull _display)) then {
 		ctrlDelete _x;
 	} forEach _controls;
 
-	[false] call SCH_magazinesReloading_fnc_lockInventory;
+	[false, _display] call SCH_magazinesReloading_fnc_lockInventory;
 
 	_display setVariable ["SCH_magazinesReloading_var_magazineInfo", nil];
 };
