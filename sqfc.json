@@ -1,0 +1,11 @@
+{
+	"inputDirs": [
+		"P:/SCH_magazinesReloading/"
+	],
+	"includePaths": [
+		"P:/"
+	],
+	"excludeList": [],
+	"outputDir": "P:/",
+	"workerThreads": 8
+}
