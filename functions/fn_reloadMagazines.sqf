@@ -2,6 +2,8 @@
 
 if (!canSuspend) exitWith { scriptNull };
 
+if (localNamespace getVariable ["SCH_magazinesReloading_var_isReloading", false]) exitWith { };
+
 params [
     ["_magazineForInsertingAmmo", [], [[]], 3],
     ["_magazineForRemovingAmmo", [], [[]], 3],
