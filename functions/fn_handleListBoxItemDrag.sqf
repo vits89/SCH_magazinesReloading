@@ -5,7 +5,7 @@ params [
 	["_itemsInfo", [], [[]]]
 ];
 
-if ((isNull _control) or { (count _itemsInfo) == 0 }) exitWith { };
+if ((isNull _control) or { _itemsInfo isEqualTo [] }) exitWith { };
 
 (_itemsInfo select 0) params [
 	"",
