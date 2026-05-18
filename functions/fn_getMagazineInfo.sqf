@@ -21,9 +21,15 @@ if (_index < 0) then {
 
 if (_index < 0) exitWith { _magazineInfo };
 
-private _className = _control lbData _index;
+private ["_className", "_magazinesConfig"];
 
-if (_className == "") exitWith { _magazineInfo };
+_className = _control lbData _index;
+
+if ((_className == "") or {
+	_magazinesConfig = configFile >> "CfgMagazines";
+
+	!(isClass (_magazinesConfig >> _className))
+}) exitWith { _magazineInfo };
 
 private _container = [_control] call SCH_magazinesReloading_fnc_getEquipmentContainer;
 
@@ -35,15 +41,17 @@ if ((count _magazines) == 0) exitWith { _magazineInfo };
 
 privateAll;
 
-_indices = [];
+_i = -1;
 
-for "_i" from 0 to (_itemsCount - 1) do {
-	if ((_control lbData _i) == _className) then {
-		_indices pushBack _i;
+for "_j" from 0 to (_itemsCount - 1) do {
+	if ((_control lbData _j) == _className) then {
+		_i = _i + 1;
+	};
+
+	if (_j == _index) exitWith {
+		_index = _i;
 	};
 };
-
-_index = _indices find _index;
 
 _magazineCounts = createHashMapFromArray (_magazines call BIS_fnc_consolidateArray);
 
@@ -55,8 +63,6 @@ _magazineAmmoCounts = createHashMap;
 
 	(_magazineAmmoCounts getOrDefault [_className, [], true]) pushBack _ammoCount;
 } forEach (keys _magazineCounts);
-
-_magazinesConfig = configFile >> "CfgMagazines";
 
 _magazineNames = [];
 
