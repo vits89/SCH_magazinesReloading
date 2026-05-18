@@ -1,5 +1,3 @@
-#include "..\definitions.hpp"
-
 params [
 	["_control", controlNull, [controlNull]],
 	["_itemsInfo", [], [[]]]
