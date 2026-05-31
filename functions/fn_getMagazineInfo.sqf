@@ -31,7 +31,7 @@ if ((_className == "") or {
 	!(isClass (_magazinesConfig >> _className))
 }) exitWith { _magazineInfo };
 
-private _container = [_control] call SCH_magazinesReloading_fnc_getEquipmentContainer;
+private _container = [_control] call SCH_magazinesReloading_fnc_getContainer;
 
 if (isNull _container) exitWith { _magazineInfo };
 
@@ -85,7 +85,7 @@ _i = 0;
 	if (_index < (_i + _ammoCountsCount)) exitWith {
 		_ammoCount = _ammoCounts select (_index - _i);
 
-		_magazineInfo = [_className, _magazineCounts get [_className, _ammoCount], _ammoCount];
+		_magazineInfo = [_className, _magazineCounts get [_className, _ammoCount], _ammoCount, _container];
 	};
 
 	_i = _i + _ammoCountsCount;

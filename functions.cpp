@@ -12,7 +12,7 @@ class SCH_magazinesReloading
 		};
 		class checkIfMagazinesAreCompatible { };
 		class createProgressBar { };
-		class getEquipmentContainer { };
+		class getContainer { };
 		class getListBoxItemIndex { };
 		class getMagazineInfo { };
 		class lockInventory { };
@@ -20,7 +20,9 @@ class SCH_magazinesReloading
 
 		class handleInventoryDisplayRegistered { };
 		class handleInventoryOpened { };
+		class handleListBoxDoubleClick { };
 		class handleListBoxItemDrag { };
 		class handleListBoxItemDrop { };
+		class handleTabSwitch { };
 	};
 };

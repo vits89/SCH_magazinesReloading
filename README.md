@@ -6,7 +6,7 @@
 
 This is a solution for reloading magazines for [Arma 3](https://arma3.com). It extends the standard inventory interface and has no dependencies.
 
-To reload, simply drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted. Magazines must be in the same player's equipment.
+To reload, simply drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted.
 
 ## Demo video
 
