@@ -1,7 +1,5 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
-if (isNull player) exitWith { objNull };
-
 params [
 	["_control", controlNull, [controlNull]]
 ];
@@ -29,9 +27,18 @@ switch (_idc) do {
 
 		switch (_activeTab) do {
 			case IDC_FG_CHOSEN_TAB: {
-				_tabsCount = _display getVariable ["SCH_magazinesReloading_var_tabsCount", 0];
+				_tabsCount = _display getVariable ["SCH_magazinesReloading_var_tabsCount", 1];
 
-				if (_tabsCount == 2) then { _containers select (_idc == IDC_FG_GROUND_ITEMS) } else { objNull }
+				if (_tabsCount == 1) then {
+					_containers param [2, objNull]
+				} else {
+					_listBoxIdc = [
+						IDC_FG_GROUND_ITEMS,
+						IDC_FG_CHOSEN_CONTAINER
+					] select ((_containers select 0) isKindOf "Bag_Base");
+
+					_containers select (_idc == _listBoxIdc)
+				}
 			};
 			case IDC_FG_GROUND_TAB: { _containers select 1 };
 			default { objNull };
