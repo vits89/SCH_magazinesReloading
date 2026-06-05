@@ -21,7 +21,6 @@ class SCH_magazinesReloading
 		class handleInventoryDisplayRegistered { };
 		class handleInventoryOpened { };
 		class handleListBoxDoubleClick { };
-		class handleListBoxItemDrag { };
 		class handleListBoxItemDrop { };
 		class handleTabSwitch { };
 	};

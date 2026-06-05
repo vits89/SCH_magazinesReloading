@@ -23,19 +23,6 @@ if ((isNull _display) or { _className != "RscDisplayInventory" }) exitWith { };
 
 {
 	(_display displayCtrl _x) ctrlAddEventHandler [
-		"LBDrag",
-		{ call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }
-	];
-} forEach [
-	IDC_FG_UNIFORM_CONTAINER,
-	IDC_FG_VEST_CONTAINER,
-	IDC_FG_BACKPACK_CONTAINER,
-	IDC_FG_CHOSEN_CONTAINER,
-	IDC_FG_GROUND_ITEMS
-];
-
-{
-	(_display displayCtrl _x) ctrlAddEventHandler [
 		"LBDrop",
 		{ call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }
 	];

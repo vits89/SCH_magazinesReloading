@@ -3,16 +3,18 @@
 params [
 	["_control", controlNull, [controlNull]],
 	["_x", 0, [0]],
-	["_y", 0, [0]]
+	["_y", 0, [0]],
+	["_listBoxIdc", -1, [0]],
+	["_itemsInfo", [], [[]]]
 ];
 
-if (isNull _control) exitWith { };
+if ((isNull _control) or { _listBoxIdc < 0 } or { _itemsInfo isEqualTo [] }) exitWith { };
 
 _display = ctrlParent _control;
 
-_magazineForRemovingAmmo = _display getVariable ["SCH_magazinesReloading_var_magazineInfo", []];
+(_itemsInfo select 0) params ["", ["_index", -1, [0]]];
 
-if (_magazineForRemovingAmmo isEqualTo []) exitWith { };
+_magazineForRemovingAmmo = [_display displayCtrl _listBoxIdc, _index] call SCH_magazinesReloading_fnc_getMagazineInfo;
 
 _idcs = switch (ctrlIDC _control) do {
 	case IDC_FG_CONTAINER_MARKER: { [IDC_FG_UNIFORM_CONTAINER, IDC_FG_VEST_CONTAINER, IDC_FG_BACKPACK_CONTAINER] };
@@ -30,9 +32,5 @@ _itemHeight = getNumber (configFile >> "RscDisplayInventory" >> "Controls" >> (c
 
 _index = [_control, [_x, _y], _itemHeight] call SCH_magazinesReloading_fnc_getListBoxItemIndex;
 _magazineForInsertingAmmo = [_control, _index] call SCH_magazinesReloading_fnc_getMagazineInfo;
-
-if (_magazineForInsertingAmmo isEqualTo []) exitWith {
-	_display setVariable ["SCH_magazinesReloading_var_magazineInfo", nil];
-};
 
 [_magazineForInsertingAmmo, _magazineForRemovingAmmo, _display] spawn SCH_magazinesReloading_fnc_reloadMagazines;
