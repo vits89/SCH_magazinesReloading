@@ -103,8 +103,6 @@ if (!(isNull _display)) then {
 	} forEach _controls;
 
 	[false, _display] call SCH_magazinesReloading_fnc_lockInventory;
-
-	_display setVariable ["SCH_magazinesReloading_var_magazineInfo", nil];
 };
 
 localNamespace setVariable ["SCH_magazinesReloading_var_isReloading", false];

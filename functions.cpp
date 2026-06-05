@@ -20,7 +20,6 @@ class SCH_magazinesReloading
 
 		class handleInventoryDisplayRegistered { };
 		class handleInventoryOpened { };
-		class handleListBoxItemDrag { };
 		class handleListBoxItemDrop { };
 	};
 };
