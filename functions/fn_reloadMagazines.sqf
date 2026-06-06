@@ -6,33 +6,33 @@ if (localNamespace getVariable ["SCH_magazinesReloading_var_isReloading", false]
 
 params [
     ["_magazineForInsertingAmmo", [], [[]], 4],
-    ["_magazineForRemovingAmmo", [], [[]], 4],
+    ["_magazineForRemovingAmmo", [], [[]], 5],
 	["_display", displayNull, [displayNull]]
 ];
 
 if ((_magazineForInsertingAmmo isEqualTo []) or { _magazineForRemovingAmmo isEqualTo [] }
     or { isNull _display }) exitWith { };
 
-_countMagazines = {
+_checkIfMagazineExists = {
 	params ["_magazineInfo", ["_container", objNull]];
 
 	if (isNull _container) then {
 		_container = _magazineInfo select 3;
 	};
 
-	{
+	((magazinesAmmoCargo _container) findIf {
 		((_x select 0) == (_magazineInfo select 0)) and { (_x select 1) == (_magazineInfo select 2) }
-	} count (magazinesAmmoCargo _container)
+	}) >= 0
 };
 
-_magazineRemoved = if ((_magazineForInsertingAmmo select 3) != (_magazineForRemovingAmmo select 3)) then {
-	([_magazineForRemovingAmmo] call _countMagazines) < (_magazineForRemovingAmmo select 1)
-} else { false };
-_container =
-	if (_magazineRemoved) then { _magazineForInsertingAmmo select 3 } else { _magazineForRemovingAmmo select 3 };
+_container = if (_magazineForRemovingAmmo select 4) then { // magazine removed
+	_magazineForInsertingAmmo select 3
+} else { _magazineForRemovingAmmo select 3 };
 
-if ((([_magazineForInsertingAmmo] call _countMagazines) == 0)
-	or { ([_magazineForRemovingAmmo, _container] call _countMagazines) == 0 }) exitWith { };
+uiSleep 0.1;
+
+if (!([_magazineForInsertingAmmo] call _checkIfMagazineExists)
+	or { !([_magazineForRemovingAmmo, _container] call _checkIfMagazineExists) }) exitWith { };
 
 _magazinesAreCompatible = [
 	_magazineForInsertingAmmo select 0,
@@ -41,7 +41,7 @@ _magazinesAreCompatible = [
 
 if (!_magazinesAreCompatible) exitWith { };
 
-if ((_magazineForInsertingAmmo isEqualTo _magazineForRemovingAmmo)
+if ((_magazineForInsertingAmmo isEqualTo (_magazineForRemovingAmmo select [0, count _magazineForInsertingAmmo]))
 	and { (_magazineForInsertingAmmo select 1) == 1 }) exitWith { };
 
 _ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertingAmmo select 0) >> "count");
