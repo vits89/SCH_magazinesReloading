@@ -5,23 +5,34 @@ if (!canSuspend) exitWith { scriptNull };
 if (localNamespace getVariable ["SCH_magazinesReloading_var_isReloading", false]) exitWith { };
 
 params [
-    ["_magazineForInsertingAmmo", [], [[]], 3],
-    ["_magazineForRemovingAmmo", [], [[]], 3],
-    ["_container", objNull, [objNull]],
+    ["_magazineForInsertingAmmo", [], [[]], 4],
+    ["_magazineForRemovingAmmo", [], [[]], 5],
 	["_display", displayNull, [displayNull]]
 ];
 
 if ((_magazineForInsertingAmmo isEqualTo []) or { _magazineForRemovingAmmo isEqualTo [] }
-    or { isNull _container } or { isNull _display }) exitWith { };
+    or { isNull _display }) exitWith { };
 
-_checkIfMagazineExist = {
-	(_magazines findIf { ((_x select 0) == (_this select 0)) and { (_x select 1) == (_this select 2) } }) >= 0
+_checkIfMagazineExists = {
+	params ["_magazineInfo", ["_container", objNull]];
+
+	if (isNull _container) then {
+		_container = _magazineInfo select 3;
+	};
+
+	((magazinesAmmoCargo _container) findIf {
+		((_x select 0) == (_magazineInfo select 0)) and { (_x select 1) == (_magazineInfo select 2) }
+	}) >= 0
 };
 
-_magazines = magazinesAmmoCargo _container;
+_container = if (_magazineForRemovingAmmo select 4) then { // magazine removed
+	_magazineForInsertingAmmo select 3
+} else { _magazineForRemovingAmmo select 3 };
 
-if (!(_magazineForInsertingAmmo call _checkIfMagazineExist)
-	or { !(_magazineForRemovingAmmo call _checkIfMagazineExist) }) exitWith { };
+uiSleep 0.1;
+
+if (!([_magazineForInsertingAmmo] call _checkIfMagazineExists)
+	or { !([_magazineForRemovingAmmo, _container] call _checkIfMagazineExists) }) exitWith { };
 
 _magazinesAreCompatible = [
 	_magazineForInsertingAmmo select 0,
@@ -30,7 +41,7 @@ _magazinesAreCompatible = [
 
 if (!_magazinesAreCompatible) exitWith { };
 
-if ((_magazineForInsertingAmmo isEqualTo _magazineForRemovingAmmo)
+if ((_magazineForInsertingAmmo isEqualTo (_magazineForRemovingAmmo select [0, count _magazineForInsertingAmmo]))
 	and { (_magazineForInsertingAmmo select 1) == 1 }) exitWith { };
 
 _ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertingAmmo select 0) >> "count");
@@ -55,7 +66,11 @@ _controls = [_display] call SCH_magazinesReloading_fnc_createProgressBar;
 
 _controls params ["_progressBar", "_progressValue"];
 
-_container addMagazineAmmoCargo [_magazineForInsertingAmmo select 0, -1, _magazineForInsertingAmmo select 2];
+(_magazineForInsertingAmmo select 3) addMagazineAmmoCargo [
+	_magazineForInsertingAmmo select 0,
+	-1,
+	_magazineForInsertingAmmo select 2
+];
 _container addMagazineAmmoCargo [_magazineForRemovingAmmo select 0, -1, _magazineForRemovingAmmo select 2];
 
 _progressValue ctrlSetStructuredText (parseText (format [
@@ -73,7 +88,8 @@ for "_n" from 1 to _ammoCount do {
 		_progressBar progressSetPosition _progress;
 	};
 
-	if ((isNull _display) or { isNull _container }) exitWith { };
+	if ((isNull _display) or { isNull (_magazineForInsertingAmmo select 3) }
+		or { isNull (_magazineForRemovingAmmo select 3) }) exitWith { };
 
 	_magazineForRemovingAmmo set [2, (_magazineForRemovingAmmo select 2) - 1];
 	_magazineForInsertingAmmo set [2, (_magazineForInsertingAmmo select 2) + 1];
@@ -89,12 +105,20 @@ if (!(isNull _display)) then {
 	uiSleep 0.25;
 };
 
-if (!(isNull _container)) then {
-	_container addMagazineAmmoCargo [_magazineForInsertingAmmo select 0, 1, _magazineForInsertingAmmo select 2];
+if (!(isNull (_magazineForInsertingAmmo select 3))) then {
+	(_magazineForInsertingAmmo select 3) addMagazineAmmoCargo [
+		_magazineForInsertingAmmo select 0,
+		1,
+		_magazineForInsertingAmmo select 2
+	];
+};
 
-	if ((_magazineForRemovingAmmo select 2) > 0) then {
-		_container addMagazineAmmoCargo [_magazineForRemovingAmmo select 0, 1, _magazineForRemovingAmmo select 2];
-	};
+if (((_magazineForRemovingAmmo select 2) > 0) and { !(isNull (_magazineForRemovingAmmo select 3)) }) then {
+	(_magazineForRemovingAmmo select 3) addMagazineAmmoCargo [
+		_magazineForRemovingAmmo select 0,
+		1,
+		_magazineForRemovingAmmo select 2
+	];
 };
 
 if (!(isNull _display)) then {
@@ -103,8 +127,6 @@ if (!(isNull _display)) then {
 	} forEach _controls;
 
 	[false, _display] call SCH_magazinesReloading_fnc_lockInventory;
-
-	_display setVariable ["SCH_magazinesReloading_var_magazineInfo", nil];
 };
 
 localNamespace setVariable ["SCH_magazinesReloading_var_isReloading", false];

@@ -19,9 +19,9 @@
 			<Russian>Снаряжение магазинов</Russian>
 		</Key>
 		<Key ID="STR_SCH_magazinesReloading_hint_description">
-			<Original>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</Original>
-			<English>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted. Both magazines must be in the same player's equipment.</English>
-			<Russian>Ты можешь снаряжать магазины. Для этого в инвентаре перетащи магазин, из которого будут вытаскиваться патроны, на магазин, в который будут вставляться патроны. Оба магазина должны быть в одном снаряжении игрока.</Russian>
+			<Original>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted.</Original>
+			<English>You can reload magazines. To do this, in the inventory, drag a magazine from which rounds will be removed and drop it on a magazine into which rounds will be inserted.</English>
+			<Russian>Ты можешь снаряжать магазины. Для этого в инвентаре перетащи магазин, из которого будут вытаскиваться патроны, на магазин, в который будут вставляться патроны.</Russian>
 		</Key>
 	</Container>
 </Project>
