@@ -37,10 +37,10 @@ _magazineForInsertingAmmo = [_control, _index] call SCH_magazinesReloading_fnc_g
 
 if (_magazineForInsertingAmmo isEqualTo []) exitWith { };
 
-_sameContainer = (_magazineForRemovingAmmo param [3, objNull]) == (_magazineForInsertingAmmo param [3, objNull]);
+_sameContainer = (_magazineForRemovingAmmo select 3) == (_magazineForInsertingAmmo select 3);
 
 _magazineRemoved = if (!_sameContainer) then {
-	(_magazineForInsertingAmmo select 3) canAdd [_magazineForRemovingAmmo param [0, ""], 1, true]
+	(_magazineForInsertingAmmo select 3) canAdd [_magazineForRemovingAmmo select 0, 1, true]
 } else { false };
 
 _magazineForRemovingAmmo pushBack _magazineRemoved;
