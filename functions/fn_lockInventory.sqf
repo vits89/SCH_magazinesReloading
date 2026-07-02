@@ -16,7 +16,24 @@ if (isNull _display) exitWith { _result };
 privateAll;
 
 if (_lock) then {
-	_controls = [1001, 1002] apply {
+	_controls = [1001, 1002] select { (ctrlVisible _x) and {
+		_position = ctrlPosition (_display displayCtrl _x);
+
+		((_position select [2]) findIf { _x == 0 }) < 0
+	} };
+
+	if ((count _controls) == 0) then {
+		_controls = [
+			IDC_FG_UNIFORM_CONTAINER,
+			IDC_FG_VEST_CONTAINER,
+			IDC_FG_BACKPACK_CONTAINER,
+			IDC_FG_CHOSEN_CONTAINER,
+
+			IDC_FG_GROUND_ITEMS
+		];
+	};
+
+	_controls = _controls apply {
 		_position = ctrlPosition (_display displayCtrl _x);
 
 		_control = _display ctrlCreate ["RscText", -1];

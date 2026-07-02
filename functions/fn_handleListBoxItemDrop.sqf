@@ -18,13 +18,22 @@ _magazineForRemovingAmmo = [_display displayCtrl _listBoxIdc, _index] call SCH_m
 
 if (_magazineForRemovingAmmo isEqualTo []) exitWith { };
 
-_idcs = switch (ctrlIDC _control) do {
+_idc = ctrlIDC _control;
+
+_idcs = switch (_idc) do {
 	case IDC_FG_CONTAINER_MARKER: { [IDC_FG_UNIFORM_CONTAINER, IDC_FG_VEST_CONTAINER, IDC_FG_BACKPACK_CONTAINER] };
 	case IDC_FG_GROUND_MARKER: { [IDC_FG_CHOSEN_CONTAINER, IDC_FG_GROUND_ITEMS] };
+	case IDC_FG_UNIFORM_CONTAINER;
+	case IDC_FG_VEST_CONTAINER;
+	case IDC_FG_BACKPACK_CONTAINER: { [_idc] };
 	default { [] };
 };
 
-_index = _idcs findIf { ctrlVisible _x };
+_index = switch (count _idcs) do {
+	case 0: { -1 };
+	case 1: { 0 };
+	default { _idcs findIf { ctrlVisible _x } };
+};
 
 if (_index < 0) exitWith { };
 
