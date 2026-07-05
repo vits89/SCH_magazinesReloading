@@ -5,13 +5,15 @@ if (!canSuspend) exitWith { scriptNull };
 if (localNamespace getVariable ["SCH_magazinesReloading_var_isReloading", false]) exitWith { };
 
 params [
-    ["_magazineForInsertingAmmo", [], [[]], 4],
-    ["_magazineForRemovingAmmo", [], [[]], 5],
+	["_magazineForInsertingAmmo", [], [[]], 4],
+	["_magazineForRemovingAmmo", [], [[]], 5],
 	["_display", displayNull, [displayNull]]
 ];
 
-if ((_magazineForInsertingAmmo isEqualTo []) or { _magazineForRemovingAmmo isEqualTo [] }
-    or { isNull _display }) exitWith { };
+_types = ["", 0, 0, objNull];
+
+if (!(_magazineForInsertingAmmo isEqualTypeArray _types)
+	or { !(_magazineForRemovingAmmo isEqualTypeArray (_types + [true])) } or { isNull _display }) exitWith { };
 
 _checkIfMagazineExists = {
 	params ["_magazineInfo", ["_container", objNull]];

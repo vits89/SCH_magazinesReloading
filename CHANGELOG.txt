@@ -1,3 +1,9 @@
+v1.3.1
+
+Changed: improved compatibility with other mods.
+Changed: improved scripts.
+
+
 v1.3.0
 
 Added: support for different containers.

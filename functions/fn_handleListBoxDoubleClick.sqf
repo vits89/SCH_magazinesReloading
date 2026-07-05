@@ -16,7 +16,7 @@ _display = ctrlParent _control;
 _tabsCount = _display getVariable ["SCH_magazinesReloading_var_tabsCount", 1];
 _containers = _display getVariable ["SCH_magazinesReloading_var_containers", []];
 
-if ((_tabsCount == 2) or { (count _containers) == 0 }) exitWith { };
+if ((_tabsCount == 2) or { (count _containers) < 2 }) exitWith { };
 
 _container = objNull;
 _isContainer = false;

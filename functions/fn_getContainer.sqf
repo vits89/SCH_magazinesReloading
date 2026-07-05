@@ -23,7 +23,7 @@ switch (_idc) do {
 		_activeTab = _display getVariable ["SCH_magazinesReloading_var_activeTab", -1];
 		_containers = _display getVariable ["SCH_magazinesReloading_var_containers", []];
 
-		if ((count _containers) == 0) exitWith { objNull };
+		if ((count _containers) < 2) exitWith { objNull };
 
 		switch (_activeTab) do {
 			case IDC_FG_CHOSEN_TAB: {

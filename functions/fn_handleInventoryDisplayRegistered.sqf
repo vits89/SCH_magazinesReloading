@@ -26,4 +26,11 @@ if ((isNull _display) or { _className != "RscDisplayInventory" }) exitWith { };
 		"LBDrop",
 		{ call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }
 	];
-} forEach [IDC_FG_CONTAINER_MARKER, IDC_FG_GROUND_MARKER];
+} forEach [
+	IDC_FG_CONTAINER_MARKER,
+	IDC_FG_GROUND_MARKER,
+
+	IDC_FG_UNIFORM_CONTAINER,
+	IDC_FG_VEST_CONTAINER,
+	IDC_FG_BACKPACK_CONTAINER
+];
