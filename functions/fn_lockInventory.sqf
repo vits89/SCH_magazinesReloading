@@ -24,11 +24,15 @@ if (_lock) then {
 
 	if ((count _controls) == 0) then {
 		_controls = [
+			IDC_FG_UNIFORM_TAB,
+			IDC_FG_VEST_TAB,
+			IDC_FG_BACKPACK_TAB,
+
 			IDC_FG_UNIFORM_CONTAINER,
 			IDC_FG_VEST_CONTAINER,
 			IDC_FG_BACKPACK_CONTAINER,
-			IDC_FG_CHOSEN_CONTAINER,
 
+			IDC_FG_CHOSEN_CONTAINER,
 			IDC_FG_GROUND_ITEMS
 		];
 	};
