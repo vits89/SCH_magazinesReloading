@@ -11,7 +11,7 @@ Changed: improved scripts.
 
 v1.3.0
 
-Added: support for different containers.
+Added: support for different containers, i.e. you can reload a magazine in your vest using a magazine in a crate.
 Changed: progress value alignment to right.
 Changed: optimized scripts.
 
