@@ -1,6 +1,6 @@
 if (!hasInterface or { isNull player }) exitWith { false };
 
-player addEventHandler ["InventoryOpened", { call SCH_magazinesReloading_fnc_handleInventoryOpened; }];
+[group player] call SCH_magazinesReloading_fnc_addGroupEventHandlers;
 
 [
 	missionNamespace,

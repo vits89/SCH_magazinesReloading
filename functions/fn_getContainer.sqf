@@ -9,15 +9,16 @@ if (isNull _control) exitWith { objNull };
 privateAll;
 
 _idc = ctrlIDC _control;
+_display = ctrlParent _control;
+
+_unit = _display getVariable ["SCH_magazinesReloading_var_unit", objNull];
 
 switch (_idc) do {
-	case IDC_FG_UNIFORM_CONTAINER: { uniformContainer player };
-	case IDC_FG_VEST_CONTAINER: { vestContainer player };
-	case IDC_FG_BACKPACK_CONTAINER: { backpackContainer player };
+	case IDC_FG_UNIFORM_CONTAINER: { uniformContainer _unit };
+	case IDC_FG_VEST_CONTAINER: { vestContainer _unit };
+	case IDC_FG_BACKPACK_CONTAINER: { backpackContainer _unit };
 	case IDC_FG_CHOSEN_CONTAINER;
 	case IDC_FG_GROUND_ITEMS: {
-		_display = ctrlParent _control;
-
 		if (!((lbCurSel (_display displayCtrl IDC_FG_GROUND_FILTER)) in [1, 3])) exitWith { objNull };
 
 		_activeTab = _display getVariable ["SCH_magazinesReloading_var_activeTab", -1];
