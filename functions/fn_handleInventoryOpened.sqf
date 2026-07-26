@@ -3,15 +3,14 @@
 if (!hasInterface) exitWith { false };
 
 params [
-	"",
-	["_primaryContainer", objNull, [objNull]],
-	["_secondaryContainer", objNull, [objNull]]
+	["_unit", objNull, [objNull]],
+	["_primaryContainer", objNull, [objNull]]
 ];
 
-if (isNull _primaryContainer) exitWith { false };
+if ((isNull _unit) or { isNull _primaryContainer }) exitWith { false };
 
-[_primaryContainer, _secondaryContainer] spawn {
-	params ["_primaryContainer"];
+_this spawn {
+	params ["_unit", "_primaryContainer"];
 
 	_display = displayNull;
 
@@ -31,7 +30,8 @@ if (isNull _primaryContainer) exitWith { false };
 	_display setVariable ["SCH_magazinesReloading_var_tabsCount", _tabsCount];
 	_display setVariable ["SCH_magazinesReloading_var_activeTab", _activeTab];
 
-	_display setVariable ["SCH_magazinesReloading_var_containers", _this];
+	_display setVariable ["SCH_magazinesReloading_var_unit", _unit];
+	_display setVariable ["SCH_magazinesReloading_var_containers", _this select [1]];
 
 	[["Weapons_basic", "SCH_magazinesReloading"], nil, nil, nil, nil, nil, nil, true] call BIS_fnc_advHint;
 };

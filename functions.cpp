@@ -10,6 +10,8 @@ class SCH_magazinesReloading
 		{
 			postInit = 1;
 		};
+		class addGroupEventHandlers { };
+		class addInventoryOpenedEventHandler { };
 		class checkIfMagazinesAreCompatible { };
 		class createProgressBar { };
 		class getContainer { };
@@ -17,6 +19,8 @@ class SCH_magazinesReloading
 		class getMagazineInfo { };
 		class lockInventory { };
 		class reloadMagazines { };
+		class removeGroupEventHandlers { };
+		class removeInventoryOpenedEventHandler { };
 
 		class handleInventoryDisplayRegistered { };
 		class handleInventoryOpened { };

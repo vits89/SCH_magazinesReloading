@@ -1,3 +1,8 @@
+v1.4.0
+
+Added: support for AI units, i.e. you can order a subordinate to open inventory and reload magazines.
+
+
 v1.3.1
 
 Changed: improved compatibility with other mods.
@@ -6,7 +11,7 @@ Changed: improved scripts.
 
 v1.3.0
 
-Added: support for different containers.
+Added: support for different containers, i.e. you can reload a magazine in your vest using a magazine in a crate.
 Changed: progress value alignment to right.
 Changed: optimized scripts.
 
