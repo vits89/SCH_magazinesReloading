@@ -14,13 +14,14 @@ _this spawn {
 
 	_display = displayNull;
 
-	_time = time + 3;
+	waitUntil [
+		{
+			_display = findDisplay IDD_FUTURAGEAR;
 
-	waitUntil {
-		_display = findDisplay IDD_FUTURAGEAR;
-
-		!(isNull _display) or { time >= _time }
-	};
+			!(isNull _display)
+		},
+		3
+	];
 
 	if (isNull _display) exitWith { };
 
