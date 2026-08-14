@@ -59,7 +59,7 @@ if (_index < 0) then {
 			if (_unit == player) then {
 				[_group] call SCH_magazinesReloading_fnc_removeGroupEventHandlers;
 
-				[] spawn {
+				spawn {
 					[group player] call SCH_magazinesReloading_fnc_addGroupEventHandlers;
 				};
 			} else {
