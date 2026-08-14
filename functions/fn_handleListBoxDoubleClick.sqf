@@ -13,13 +13,12 @@ if (_className == "") exitWith { };
 
 _display = ctrlParent _control;
 
-_tabsCount = _display getVariable ["SCH_magazinesReloading_var_tabsCount", 1];
+_isContainer = _display getVariable ["SCH_magazinesReloading_var_isContainer", false];
 _containers = _display getVariable ["SCH_magazinesReloading_var_containers", []];
 
-if ((_tabsCount == 2) or { (count _containers) < 2 }) exitWith { };
+if (_isContainer or { (count _containers) < 2 }) exitWith { };
 
 _container = objNull;
-_isContainer = false;
 
 _config = configFile >> "CfgWeapons" >> _className;
 _configExists = isClass _config;

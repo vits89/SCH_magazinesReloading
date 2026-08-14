@@ -10,7 +10,7 @@ params [
 if ((isNull _unit) or { isNull _primaryContainer }) exitWith { false };
 
 _this spawn {
-	params ["_unit", "_primaryContainer"];
+	params ["_unit"];
 
 	_display = displayNull;
 
@@ -24,11 +24,12 @@ _this spawn {
 
 	if (isNull _display) exitWith { };
 
-	_tabsCount = [2, 1] select (([0, 11] findIf { _primaryContainer getEntityInfo _x }) >= 0);
-	_activeTab = [IDC_FG_GROUND_TAB, IDC_FG_CHOSEN_TAB] select (_tabsCount == 2);
+	_idcs = [IDC_FG_GROUND_TAB, IDC_FG_CHOSEN_TAB];
 
-	_display setVariable ["SCH_magazinesReloading_var_tabsCount", _tabsCount];
-	_display setVariable ["SCH_magazinesReloading_var_activeTab", _activeTab];
+	_isContainer = (_idcs findIf { !(ctrlVisible _x) }) < 0;
+
+	_display setVariable ["SCH_magazinesReloading_var_isContainer", _isContainer];
+	_display setVariable ["SCH_magazinesReloading_var_activeTab", _idcs select _isContainer];
 
 	_display setVariable ["SCH_magazinesReloading_var_unit", _unit];
 	_display setVariable ["SCH_magazinesReloading_var_containers", _this select [1]];
