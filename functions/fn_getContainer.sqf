@@ -28,18 +28,16 @@ switch (_idc) do {
 
 		switch (_activeTab) do {
 			case IDC_FG_CHOSEN_TAB: {
-				_tabsCount = _display getVariable ["SCH_magazinesReloading_var_tabsCount", 1];
+				_isContainer = _display getVariable ["SCH_magazinesReloading_var_isContainer", false];
 
-				if (_tabsCount == 1) then {
-					_containers param [2, objNull]
-				} else {
+				if (_isContainer) then {
 					_listBoxIdc = [
 						IDC_FG_GROUND_ITEMS,
 						IDC_FG_CHOSEN_CONTAINER
 					] select ((_containers select 0) isKindOf "Bag_Base");
 
 					_containers select (_idc == _listBoxIdc)
-				}
+				} else { _containers param [2, objNull] }
 			};
 			case IDC_FG_GROUND_TAB: { _containers select 1 };
 			default { objNull };
