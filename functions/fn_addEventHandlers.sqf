@@ -1,6 +1,19 @@
 if (!hasInterface or { isNull player }) exitWith { false };
 
-[group player] call SCH_magazinesReloading_fnc_addGroupEventHandlers;
+addMissionEventHandler [
+	"TeamSwitch",
+	{
+		params ["_prevUnit", "_newUnit"];
+
+		_prevUnitGroup = group _prevUnit;
+		_newUnitGroup = group _newUnit;
+
+		if (_prevUnitGroup == _newUnitGroup) exitWith { };
+
+		[_prevUnitGroup] call SCH_magazinesReloading_fnc_removeGroupEventHandlers;
+		[_newUnitGroup] call SCH_magazinesReloading_fnc_addGroupEventHandlers;
+	}
+];
 
 [
 	missionNamespace,
@@ -11,5 +24,7 @@ if (!hasInterface or { isNull player }) exitWith { false };
 		};
 	}
 ] call BIS_fnc_addScriptedEventHandler;
+
+[group player] call SCH_magazinesReloading_fnc_addGroupEventHandlers;
 
 true
