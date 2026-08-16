@@ -1,3 +1,9 @@
+v1.4.1
+
+Changed: expanded functionality to switchable units.
+Changed: improved and optimized scripts.
+
+
 v1.4.0
 
 Added: support for AI units, i.e. you can order a subordinate to open inventory and reload magazines.
