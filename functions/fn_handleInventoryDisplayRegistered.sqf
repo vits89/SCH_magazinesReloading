@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_display", displayNull, [displayNull]],
 	["_className", "", [""]]
@@ -14,21 +16,21 @@ _display displayAddEventHandler ["MouseButtonUp", { call SCH_magazinesReloading_
 		"ButtonClick",
 		{ call SCH_magazinesReloading_fnc_handleTabSwitch; }
 	];
-} forEach [IDC_FG_CHOSEN_TAB, IDC_FG_GROUND_TAB];
+} forEach TAB_IDCS;
 
 {
 	_control = _display displayCtrl _x;
 
 	_control ctrlAddEventHandler ["LBDblClick", { call SCH_magazinesReloading_fnc_handleListBoxDoubleClick; }];
 	_control ctrlAddEventHandler ["LBDrag", { call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }];
-} forEach [IDC_FG_CHOSEN_CONTAINER, IDC_FG_GROUND_ITEMS];
+} forEach CRATE_CONTAINER_IDCS;
 
 {
 	_control = _display displayCtrl _x;
 
 	_control ctrlAddEventHandler ["LBDrag", { call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }];
 	_control ctrlAddEventHandler ["LBDrop", { call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }];
-} forEach [IDC_FG_UNIFORM_CONTAINER, IDC_FG_VEST_CONTAINER, IDC_FG_BACKPACK_CONTAINER];
+} forEach UNIT_CONTAINER_IDCS;
 
 {
 	(_display displayCtrl _x) ctrlAddEventHandler [

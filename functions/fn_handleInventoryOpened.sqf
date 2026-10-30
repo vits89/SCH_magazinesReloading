@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 if (!hasInterface) exitWith { false };
 
 params [
@@ -25,12 +27,10 @@ _this spawn {
 
 	if (isNull _display) exitWith { };
 
-	_idcs = [IDC_FG_GROUND_TAB, IDC_FG_CHOSEN_TAB];
-
-	_isContainer = (_idcs findIf { !(ctrlVisible _x) }) < 0;
+	_isContainer = (TAB_IDCS findIf { !(ctrlVisible _x) }) < 0;
 
 	_display setVariable ["SCH_magazinesReloading_var_isContainer", _isContainer];
-	_display setVariable ["SCH_magazinesReloading_var_activeTab", _idcs select _isContainer];
+	_display setVariable ["SCH_magazinesReloading_var_activeTab", TAB_IDCS select _isContainer];
 
 	_display setVariable ["SCH_magazinesReloading_var_unit", _unit];
 	_display setVariable ["SCH_magazinesReloading_var_containers", _this select [1]];

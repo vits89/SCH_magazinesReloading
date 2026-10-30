@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_control", controlNull, [controlNull]]
 ];
@@ -31,10 +33,7 @@ switch (_idc) do {
 				_isContainer = _display getVariable ["SCH_magazinesReloading_var_isContainer", false];
 
 				if (_isContainer) then {
-					_listBoxIdc = [
-						IDC_FG_GROUND_ITEMS,
-						IDC_FG_CHOSEN_CONTAINER
-					] select ((_containers select 0) isKindOf "Bag_Base");
+					_listBoxIdc = CRATE_CONTAINER_IDCS select ((_containers select 0) isKindOf "Bag_Base");
 
 					_containers select (_idc == _listBoxIdc)
 				} else { _containers param [2, objNull] }

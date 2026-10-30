@@ -41,6 +41,12 @@ _magazineCanBeReloaded =
 
 if (!_magazineCanBeReloaded) exitWith { };
 
+_checkIfUnitIsAlive = { !(isNull _this) and { (lifeState _this) in ["HEALTHY", "INJURED"] } };
+
+_unit = _display getVariable ["SCH_magazinesReloading_var_unit", objNull];
+
+if (!(_unit call _checkIfUnitIsAlive)) exitWith { };
+
 _ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertingAmmo select 0) >> "count");
 
 _ammoCount = (_magazineForInsertingAmmo select 2) + (_magazineForRemovingAmmo select 2);
@@ -82,7 +88,7 @@ for "_n" from 1 to _ammoCount do {
 		_progressBar progressSetPosition _progress;
 	};
 
-	if ((isNull _display) or { isNull (_magazineForInsertingAmmo select 3) }
+	if (!(_unit call _checkIfUnitIsAlive) or { isNull _display } or { isNull (_magazineForInsertingAmmo select 3) }
 		or { isNull (_magazineForRemovingAmmo select 3) }) exitWith { };
 
 	_magazineForRemovingAmmo set [2, (_magazineForRemovingAmmo select 2) - 1];
