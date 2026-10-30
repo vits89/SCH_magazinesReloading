@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_control", controlNull, [controlNull]],
 	["_x", 0, [0]],
@@ -21,8 +23,8 @@ if (_magazineForRemovingAmmo isEqualTo []) exitWith { };
 _idc = ctrlIDC _control;
 
 _idcs = switch (_idc) do {
-	case IDC_FG_CONTAINER_MARKER: { [IDC_FG_UNIFORM_CONTAINER, IDC_FG_VEST_CONTAINER, IDC_FG_BACKPACK_CONTAINER] };
-	case IDC_FG_GROUND_MARKER: { [IDC_FG_CHOSEN_CONTAINER, IDC_FG_GROUND_ITEMS] };
+	case IDC_FG_CONTAINER_MARKER: { UNIT_CONTAINER_IDCS };
+	case IDC_FG_GROUND_MARKER: { CRATE_CONTAINER_IDCS };
 	case IDC_FG_UNIFORM_CONTAINER;
 	case IDC_FG_VEST_CONTAINER;
 	case IDC_FG_BACKPACK_CONTAINER: { [_idc] };

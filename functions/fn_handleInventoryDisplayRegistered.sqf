@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_display", displayNull, [displayNull]],
 	["_className", "", [""]]
@@ -12,25 +14,18 @@ if ((isNull _display) or { _className != "RscDisplayInventory" }) exitWith { };
 		"ButtonClick",
 		{ call SCH_magazinesReloading_fnc_handleTabSwitch; }
 	];
-} forEach [IDC_FG_CHOSEN_TAB, IDC_FG_GROUND_TAB];
+} forEach TAB_IDCS;
 
 {
 	(_display displayCtrl _x) ctrlAddEventHandler [
 		"LBDblClick",
 		{ call SCH_magazinesReloading_fnc_handleListBoxDoubleClick; }
 	];
-} forEach [IDC_FG_CHOSEN_CONTAINER, IDC_FG_GROUND_ITEMS];
+} forEach CRATE_CONTAINER_IDCS;
 
 {
 	(_display displayCtrl _x) ctrlAddEventHandler [
 		"LBDrop",
 		{ call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }
 	];
-} forEach [
-	IDC_FG_CONTAINER_MARKER,
-	IDC_FG_GROUND_MARKER,
-
-	IDC_FG_UNIFORM_CONTAINER,
-	IDC_FG_VEST_CONTAINER,
-	IDC_FG_BACKPACK_CONTAINER
-];
+} forEach ([IDC_FG_CONTAINER_MARKER, IDC_FG_GROUND_MARKER] + UNIT_CONTAINER_IDCS);

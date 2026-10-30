@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_lock", true, [true]],
 	["_display", displayNull, [displayNull]]
@@ -21,18 +23,7 @@ if (_lock) then {
 	} };
 
 	if ((count _idcs) == 0) then {
-		_idcs append [
-			IDC_FG_UNIFORM_TAB,
-			IDC_FG_VEST_TAB,
-			IDC_FG_BACKPACK_TAB,
-
-			IDC_FG_UNIFORM_CONTAINER,
-			IDC_FG_VEST_CONTAINER,
-			IDC_FG_BACKPACK_CONTAINER,
-
-			IDC_FG_CHOSEN_CONTAINER,
-			IDC_FG_GROUND_ITEMS
-		];
+		_idcs append ([IDC_FG_UNIFORM_TAB, IDC_FG_VEST_TAB, IDC_FG_BACKPACK_TAB] + CONTAINER_IDCS);
 	};
 
 	_controls = _idcs apply {
