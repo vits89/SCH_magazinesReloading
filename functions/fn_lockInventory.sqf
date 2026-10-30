@@ -21,7 +21,7 @@ if (_lock) then {
 	} };
 
 	if ((count _idcs) == 0) then {
-		_idcs = [
+		_idcs append [
 			IDC_FG_UNIFORM_TAB,
 			IDC_FG_VEST_TAB,
 			IDC_FG_BACKPACK_TAB,
