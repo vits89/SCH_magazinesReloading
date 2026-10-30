@@ -1,6 +1,8 @@
 #include "\a3\ui_f\hpp\defineCommonGrids.inc"
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_display", displayNull, [displayNull]]
 ];
@@ -79,14 +81,7 @@ _handle = [_display, _createItemMarkers] spawn {
 
 	_magazineInfo = [];
 
-	_controls = ([
-		IDC_FG_UNIFORM_CONTAINER,
-		IDC_FG_VEST_CONTAINER,
-		IDC_FG_BACKPACK_CONTAINER,
-
-		IDC_FG_CHOSEN_CONTAINER,
-		IDC_FG_GROUND_ITEMS
-	] select { ctrlVisible _x }) apply { _display displayCtrl _x };
+	_controls = (CONTAINER_IDCS select { ctrlVisible _x }) apply { _display displayCtrl _x };
 	_controlsConfig = configFile >> "RscDisplayInventory" >> "Controls";
 
 	_scrollBarWidth = 0.75 * GUI_GRID_W;

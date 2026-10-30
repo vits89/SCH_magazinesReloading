@@ -1,13 +1,6 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
-#define IDCS [\
-	IDC_FG_CONTAINER_MARKER,\
-	IDC_FG_GROUND_MARKER,\
-	\
-	IDC_FG_UNIFORM_CONTAINER,\
-	IDC_FG_VEST_CONTAINER,\
-	IDC_FG_BACKPACK_CONTAINER\
-]
+#include "..\definitions.hpp"
 
 params [
 	["_display", displayNull, [displayNull]],
@@ -23,7 +16,7 @@ if (!((_button + 65536) in (actionKeys "DefaultAction"))
 
 _control = _display ctrlAt [_x, _y];
 
-if (!(isNull _control) and { (ctrlIDC _control) in IDCS }) exitWith { };
+if (!(isNull _control) and { (ctrlIDC _control) in (MARKER_IDCS + UNIT_CONTAINER_IDCS) }) exitWith { };
 
 [_display] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
 

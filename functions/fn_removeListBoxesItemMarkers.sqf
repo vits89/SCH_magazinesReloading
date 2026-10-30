@@ -1,5 +1,7 @@
 #include "\a3\ui_f\hpp\defineResincl.inc"
 
+#include "..\definitions.hpp"
+
 params [
 	["_control", displayNull, [displayNull, controlNull]]
 ];
@@ -32,14 +34,7 @@ if (_isDisplay) then {
 
 	{
 		[_control displayCtrl _x] call _removeItemMarkers;
-	} forEach [
-		IDC_FG_UNIFORM_CONTAINER,
-		IDC_FG_VEST_CONTAINER,
-		IDC_FG_BACKPACK_CONTAINER,
-
-		IDC_FG_CHOSEN_CONTAINER,
-		IDC_FG_GROUND_ITEMS
-	];
+	} forEach CONTAINER_IDCS;
 
 	_control setVariable ["SCH_magazinesReloading_var_listBoxesItemMarkersUpdaterHandle", nil];
 } else {

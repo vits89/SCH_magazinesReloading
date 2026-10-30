@@ -37,4 +37,4 @@ _display displayAddEventHandler ["MouseButtonUp", { call SCH_magazinesReloading_
 		"LBDrop",
 		{ call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }
 	];
-} forEach [IDC_FG_CONTAINER_MARKER, IDC_FG_GROUND_MARKER];
+} forEach MARKER_IDCS;
