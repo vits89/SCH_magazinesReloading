@@ -21,7 +21,7 @@ _itemHeight = _itemHeight + (_itemHeight mod pixelH);
 
 privateAll;
 
-(ctrlPosition _control) params ["", "_controlY", "", "_controlH"];
+(ctrlPosition _control) params ["", "_controlY", "", "_controlHeight"];
 ((ctrlScrollValues _control) apply { [0, _x] select (_x >= 0) }) params ["_scrollValueV"];
 
 _coordinates params ["", "_y"];
@@ -30,12 +30,12 @@ _y = _y - _controlY;
 
 _contentHeight = _itemsCount * _itemHeight;
 
-_offset = if (_contentHeight > _controlH) then {
-	_scrollValueV * (_contentHeight - (floor (_controlH / _itemHeight)) * _itemHeight)
+_offsetV = if (_contentHeight > _controlHeight) then {
+	_scrollValueV * (_contentHeight - (floor (_controlHeight / _itemHeight)) * _itemHeight)
 } else { 0 };
 
-if (_y <= (_contentHeight - _offset)) then {
-	_index = floor ((_offset + _y) / _itemHeight);
+if (_y <= (_contentHeight - _offsetV)) then {
+	_index = floor ((_y + _offsetV) / _itemHeight);
 };
 
 _index

@@ -14,14 +14,14 @@ if (isNull _display) exitWith { false };
 privateAll;
 
 if (_lock) then {
-	_controls = [1001, 1002] select { (ctrlVisible _x) and {
+	_idcs = [1001, 1002] select { (ctrlVisible _x) and {
 		_position = ctrlPosition (_display displayCtrl _x);
 
 		((_position select [2]) findIf { _x == 0 }) < 0
 	} };
 
-	if ((count _controls) == 0) then {
-		_controls = [
+	if ((count _idcs) == 0) then {
+		_idcs = [
 			IDC_FG_UNIFORM_TAB,
 			IDC_FG_VEST_TAB,
 			IDC_FG_BACKPACK_TAB,
@@ -35,7 +35,7 @@ if (_lock) then {
 		];
 	};
 
-	_controls = _controls apply {
+	_controls = _idcs apply {
 		_position = ctrlPosition (_display displayCtrl _x);
 
 		_control = _display ctrlCreate ["RscText", -1];
