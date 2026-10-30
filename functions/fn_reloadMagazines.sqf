@@ -51,6 +51,12 @@ _ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertin
 if (((_magazineForInsertingAmmo select 2) == _ammoCountMax)
 	or { (_magazineForRemovingAmmo select 2) == 0 }) exitWith { };
 
+_checkIfUnitIsAlive = { !(isNull _this) and { (lifeState _this) in ["HEALTHY", "INJURED"] } };
+
+_unit = _display getVariable ["SCH_magazinesReloading_var_unit", objNull];
+
+if (!(_unit call _checkIfUnitIsAlive)) exitWith { };
+
 _ammoCount = (_magazineForInsertingAmmo select 2) + (_magazineForRemovingAmmo select 2);
 
 _ammoCount = if (_ammoCount > _ammoCountMax) then {
@@ -90,7 +96,7 @@ for "_n" from 1 to _ammoCount do {
 		_progressBar progressSetPosition _progress;
 	};
 
-	if ((isNull _display) or { isNull (_magazineForInsertingAmmo select 3) }
+	if (!(_unit call _checkIfUnitIsAlive) or { isNull _display } or { isNull (_magazineForInsertingAmmo select 3) }
 		or { isNull (_magazineForRemovingAmmo select 3) }) exitWith { };
 
 	_magazineForRemovingAmmo set [2, (_magazineForRemovingAmmo select 2) - 1];
