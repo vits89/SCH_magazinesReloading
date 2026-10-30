@@ -1,3 +1,5 @@
+#include "\a3\ui_f\hpp\defineResincl.inc"
+
 #define IDCS [\
 	IDC_FG_CONTAINER_MARKER,\
 	IDC_FG_GROUND_MARKER,\
