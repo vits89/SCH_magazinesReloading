@@ -36,20 +36,12 @@ uiSleep 0.1;
 if (!([_magazineForInsertingAmmo] call _checkIfMagazineExists)
 	or { !([_magazineForRemovingAmmo, _container] call _checkIfMagazineExists) }) exitWith { };
 
-_magazinesAreCompatible = [
-	_magazineForInsertingAmmo select 0,
-	_magazineForRemovingAmmo select 0
-] call SCH_magazinesReloading_fnc_checkIfMagazinesAreCompatible;
+_magazineCanBeReloaded =
+	[_magazineForInsertingAmmo, _magazineForRemovingAmmo] call SCH_magazinesReloading_fnc_checkIfMagazineCanBeReloaded;
 
-if (!_magazinesAreCompatible) exitWith { };
-
-if ((_magazineForInsertingAmmo isEqualTo (_magazineForRemovingAmmo select [0, count _magazineForInsertingAmmo]))
-	and { (_magazineForInsertingAmmo select 1) == 1 }) exitWith { };
+if (!_magazineCanBeReloaded) exitWith { };
 
 _ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertingAmmo select 0) >> "count");
-
-if (((_magazineForInsertingAmmo select 2) == _ammoCountMax)
-	or { (_magazineForRemovingAmmo select 2) == 0 }) exitWith { };
 
 _ammoCount = (_magazineForInsertingAmmo select 2) + (_magazineForRemovingAmmo select 2);
 
