@@ -21,16 +21,20 @@ _createItemMarkers = {
 		[_listBox] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
 	};
 
-	private ["_magazinesInfo", "_visibleItemPositionsCount"];
+	([_listBox] call SCH_magazinesReloading_fnc_getMagazinesInfo) params [["_magazinesInfo", []]];
 
-	_magazinesInfo = ([_listBox] call SCH_magazinesReloading_fnc_getMagazinesInfo) select 0;
+	if (_magazinesInfo isEqualTo []) exitWith {
+		[_listBox] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
+	};
+
 	_magazinesInfo = (_magazinesInfo apply { _x select 3 }) createHashMapFromArray _magazinesInfo;
 
 	_visibleItemPositions = _visibleItemPositions select { [
 		_magazinesInfo getOrDefault [_x select 0, []],
 		_magazineForRemovingAmmo
 	] call SCH_magazinesReloading_fnc_checkIfMagazineCanBeReloaded };
-	_visibleItemPositionsCount = count _visibleItemPositions;
+
+	private _visibleItemPositionsCount = count _visibleItemPositions;
 
 	if (_visibleItemPositionsCount == 0) exitWith {
 		[_listBox] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
@@ -39,6 +43,9 @@ _createItemMarkers = {
 	privateAll;
 
 	(ctrlPosition _listBox) params ["_listBoxX", "_listBoxY"];
+
+	_ammoBarWidth = 0.2 * GUI_GRID_W;
+	_x0 = _listBoxX + _ammoBarWidth;
 
 	_controls = _listBox getVariable ["SCH_magazinesReloading_var_itemMarkerControls", []];
 	_controlsCount = count _controls;
@@ -54,9 +61,6 @@ _createItemMarkers = {
 			ctrlDelete (_controls deleteAt _i);
 		};
 	};
-
-	_ammoBarWidth = 0.2 * GUI_GRID_W;
-	_x0 = _listBoxX + _ammoBarWidth;
 
 	{
 		_control = _controls select _forEachIndex;
