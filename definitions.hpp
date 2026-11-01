@@ -13,5 +13,5 @@
 
 #define SECONDS_PER_ROUND 0.8
 
-#define PROGRESS_UPDATE_PERIOD 0.1
+#define PROGRESS_UPDATE_PERIOD 0.02
 #define PROGRESS_VALUE_FORMAT "<t align='right'>%1 / %2</t>"
