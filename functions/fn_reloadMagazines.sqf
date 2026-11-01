@@ -62,6 +62,7 @@ _ammoCount = (_magazineForInsertingAmmo select 2) + (_magazineForRemovingAmmo se
 _ammoCount = if (_ammoCount > _ammoCountMax) then {
 	_ammoCountMax - (_magazineForInsertingAmmo select 2)
 } else { _magazineForRemovingAmmo select 2 };
+_ammoCountTotal = (_magazineForInsertingAmmo select 2) + _ammoCount;
 
 _progress = 0;
 _progressInc = PROGRESS_UPDATE_PERIOD / (SECONDS_PER_ROUND * _ammoCount);
@@ -84,7 +85,7 @@ _container addMagazineAmmoCargo [_magazineForRemovingAmmo select 0, -1, _magazin
 _progressValue ctrlSetStructuredText (parseText (format [
 	PROGRESS_VALUE_FORMAT,
 	_magazineForInsertingAmmo select 2,
-	_ammoCountMax
+	_ammoCountTotal
 ]));
 
 for "_n" from 1 to _ammoCount do {
@@ -105,7 +106,7 @@ for "_n" from 1 to _ammoCount do {
 	_progressValue ctrlSetStructuredText (parseText (format [
 		PROGRESS_VALUE_FORMAT,
 		_magazineForInsertingAmmo select 2,
-		_ammoCountMax
+		_ammoCountTotal
 	]));
 };
 
