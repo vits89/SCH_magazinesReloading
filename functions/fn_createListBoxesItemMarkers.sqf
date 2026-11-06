@@ -88,20 +88,20 @@ _handle = [_display, _createItemMarkers] spawn {
 	_unit = _display getVariable ["SCH_magazinesReloading_var_unit", objNull];
 	_magazineInfo = _display getVariable ["SCH_magazinesReloading_var_magazineInfo", []];
 
-	_controls = (CONTAINER_IDCS select { ctrlVisible _x }) apply { _display displayCtrl _x };
 	_controlsConfig = configFile >> "RscDisplayInventory" >> "Controls";
+
+	_controlsInfo = (CONTAINER_IDCS select { ctrlVisible _x }) apply {
+		_control = _display displayCtrl _x;
+
+		[_control, getNumber (_controlsConfig >> (ctrlClassName _control) >> "rowHeight")]
+	};
 
 	while { !(isNull _unit) and { (lifeState _unit) in ["HEALTHY", "INJURED"] } and { !(isNull _display) }
 		and { _display getVariable ["SCH_magazinesReloading_var_isDragging", false] }
 		and { _magazineInfo isNotEqualTo [] } } do {
 		{
-			[
-				_x,
-				getNumber (_controlsConfig >> (ctrlClassName _x) >> "rowHeight"),
-				_scrollBarWidth,
-				_magazineInfo
-			] call _createItemMarkers;
-		} forEach _controls;
+			(_x + [_scrollBarWidth, _magazineInfo]) call _createItemMarkers;
+		} forEach _controlsInfo;
 
 		uiSleep 0.02;
 	};
