@@ -17,24 +17,25 @@ if ((isNull _control) or { (ctrlType _control) != CT_LISTBOX } or {
 }) exitWith { _index };
 if (_itemHeight <= 0) exitWith { _index };
 
+_itemHeight = _itemHeight + (_itemHeight mod pixelH);
+
 privateAll;
 
-(ctrlPosition _control) params ["", "_controlY", "", "_controlH"];
-((ctrlScrollValues _control) apply { if (_x < 0) then { 0 } else { _x } }) params ["_scrollValueV"];
+(ctrlPosition _control) params ["", "_controlY", "", "_controlHeight"];
+((ctrlScrollValues _control) apply { [0, _x] select (_x >= 0) }) params ["_scrollValueV"];
 
 _coordinates params ["", "_y"];
 
 _y = _y - _controlY;
-_itemHeight = _itemHeight + (_itemHeight mod pixelH);
 
 _contentHeight = _itemsCount * _itemHeight;
 
-_offset = if (_contentHeight > _controlH) then {
-	_scrollValueV * (_contentHeight - (floor (_controlH / _itemHeight)) * _itemHeight)
+_offsetV = if (_contentHeight > _controlHeight) then {
+	_scrollValueV * (_contentHeight - (floor (_controlHeight / _itemHeight)) * _itemHeight)
 } else { 0 };
 
-if (_y <= (_contentHeight - _offset)) then {
-	_index = floor ((_offset + _y) / _itemHeight);
+if (_y <= (_contentHeight - _offsetV)) then {
+	_index = floor ((_y + _offsetV) / _itemHeight);
 };
 
 _index
