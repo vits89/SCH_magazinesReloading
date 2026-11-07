@@ -13,5 +13,8 @@
 
 #define SECONDS_PER_ROUND 0.8
 
+#define SOUND_FILEPATH "\a3\sounds_f\weapons\Other\reload_bolt_1.wss"
+#define SOUND_DURATION 0.6
+
 #define PROGRESS_UPDATE_PERIOD 0.02
 #define PROGRESS_VALUE_FORMAT "<t align='right'>%1 / %2</t>"

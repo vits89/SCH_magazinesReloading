@@ -65,7 +65,10 @@ _ammoCount = if (_ammoCount > _ammoCountMax) then {
 _ammoCountTotal = (_magazineForInsertingAmmo select 2) + _ammoCount;
 
 _progress = 0;
+_soundId = -1;
+
 _progressInc = PROGRESS_UPDATE_PERIOD / (SECONDS_PER_ROUND * _ammoCount);
+_timeBeforeSoundPlayback = SECONDS_PER_ROUND - SOUND_DURATION;
 
 localNamespace setVariable ["SCH_magazinesReloading_var_isReloading", true];
 
@@ -89,12 +92,18 @@ _progressValue ctrlSetStructuredText (parseText (format [
 ]));
 
 for "_n" from 1 to _ammoCount do {
+	_timeToPlaySound = time + _timeBeforeSoundPlayback;
+
 	for "_m" from 1 to SECONDS_PER_ROUND / PROGRESS_UPDATE_PERIOD do {
 		uiSleep PROGRESS_UPDATE_PERIOD;
 
 		_progress = _progress + _progressInc;
 
 		_progressBar progressSetPosition _progress;
+
+		if ((time >= _timeToPlaySound) and { (_soundId < 0) or { (count (soundParams _soundId)) == 0 } }) then {
+			_soundId = playSound3D [SOUND_FILEPATH, objNull, false, getPosASL _unit, 1, 1, 5];
+		};
 	};
 
 	if (!(_unit call _checkIfUnitIsAlive) or { isNull _display } or { isNull (_magazineForInsertingAmmo select 3) }
@@ -113,6 +122,8 @@ for "_n" from 1 to _ammoCount do {
 if (!(isNull _display)) then {
 	uiSleep 0.25;
 };
+
+stopSound _soundId;
 
 if (!(isNull (_magazineForInsertingAmmo select 3))) then {
 	(_magazineForInsertingAmmo select 3) addMagazineAmmoCargo [
