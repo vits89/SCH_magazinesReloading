@@ -103,7 +103,7 @@ _handle = [_display, _createItemMarkers] spawn {
 			(_x + [_scrollBarWidth, _magazineInfo]) call _createItemMarkers;
 		} forEach _controlsInfo;
 
-		uiSleep 0.02;
+		uiSleep UI_UPDATE_PERIOD;
 	};
 
 	[_display] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
