@@ -1,3 +1,12 @@
+v1.4.2
+
+Added: reload sound.
+Changed: progress value display to total ammo count.
+Changed: make progress bar update smoother.
+Changed: improved and optimized scripts.
+Fixed: an incapacitated unit could reload magazines.
+
+
 v1.4.1
 
 Changed: expanded functionality to switchable units.
@@ -36,9 +45,8 @@ Changed: optimized scripts.
 
 v1.2.0
 
-Added: implemented the mod.
-Added: implemented autostart.
-Changed: updated the hint.
+Added: autostart of the solution.
+Changed: the hint.
 
 
 v1.1.0
