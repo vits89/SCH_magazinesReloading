@@ -44,15 +44,15 @@ privateAll;
 _adjustedIndex = _index;
 
 if (_className != "") then {
-	_i = -1;
+	_index = -1;
 
-	for "_j" from 0 to (_itemsCount - 1) do {
-		if ((_control lbData _j) == _className) then {
-			_i = _i + 1;
+	for "_i" from 0 to (_itemsCount - 1) do {
+		if ((_control lbData _i) == _className) then {
+			_index = _index + 1;
 		};
 
-		if (_j == _adjustedIndex) exitWith {
-			_adjustedIndex = _i;
+		if (_i == _adjustedIndex) exitWith {
+			_adjustedIndex = _index;
 		};
 	};
 } else {
@@ -90,25 +90,20 @@ _magazineNames sort true;
 
 scopeName "main";
 
-_i = 0;
+_fillMagazinesInfo = if (_adjustedIndex >= 0) then {
+	_index = 0;
 
-{
-	_className = _x select 1;
+	{
+		if (_adjustedIndex >= (_index + _ammoCountsCount)) exitWith { };
 
-	_ammoCounts = _magazineAmmoCounts get _className;
-	_ammoCountsCount = count _ammoCounts;
+		_ammoCount = _ammoCounts select (_adjustedIndex - _index);
 
-	if (_adjustedIndex >= 0) then {
-		if (_adjustedIndex < (_i + _ammoCountsCount)) then {
-			_ammoCount = _ammoCounts select (_adjustedIndex - _i);
+		_magazinesInfo append [_className, _magazineCounts get [_className, _ammoCount], _ammoCount, _container];
 
-			_magazinesInfo append [_className, _magazineCounts get [_className, _ammoCount], _ammoCount, _container];
-
-			breakTo "main";
-		};
-
-		_i = _i + _ammoCountsCount;
-	} else {
+		breakTo "main";
+	}
+} else {
+	{
 		{
 			(_magazinesInfo select 0) pushBack [
 				_className,
@@ -117,9 +112,18 @@ _i = 0;
 				_index + _forEachIndex
 			];
 		} forEach _ammoCounts;
+	}
+};
 
-		_index = _index + _ammoCountsCount;
-	};
+{
+	_className = _x select 1;
+
+	_ammoCounts = _magazineAmmoCounts get _className;
+	_ammoCountsCount = count _ammoCounts;
+
+	call _fillMagazinesInfo;
+
+	_index = _index + _ammoCountsCount;
 } forEach _magazineNames;
 
 _magazinesInfo
