@@ -21,16 +21,14 @@ _createItemMarkers = {
 		[_listBox] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
 	};
 
-	([_listBox] call SCH_magazinesReloading_fnc_getMagazinesInfo) params [["_magazinesInfo", []]];
+	private _magazinesInfo = [_listBox] call SCH_magazinesReloading_fnc_getMagazinesInfo;
 
 	if (_magazinesInfo isEqualTo []) exitWith {
 		[_listBox] call SCH_magazinesReloading_fnc_removeListBoxesItemMarkers;
 	};
 
-	_magazinesInfo = (_magazinesInfo apply { _x select 3 }) createHashMapFromArray _magazinesInfo;
-
 	_visibleItemPositions = _visibleItemPositions select { [
-		_magazinesInfo getOrDefault [_x select 0, []],
+		[_listBox, _x select 0] call SCH_magazinesReloading_fnc_getMagazinesInfo,
 		_magazineForRemovingAmmo
 	] call SCH_magazinesReloading_fnc_checkIfMagazineCanBeReloaded };
 
