@@ -9,6 +9,8 @@ params [
 
 if ((isNull _display) or { _className != "RscDisplayInventory" }) exitWith { };
 
+_display displayAddEventHandler ["MouseButtonUp", { call SCH_magazinesReloading_fnc_handleMouseButtonUp; }];
+
 {
 	(_display displayCtrl _x) ctrlAddEventHandler [
 		"ButtonClick",
@@ -17,15 +19,22 @@ if ((isNull _display) or { _className != "RscDisplayInventory" }) exitWith { };
 } forEach TAB_IDCS;
 
 {
-	(_display displayCtrl _x) ctrlAddEventHandler [
-		"LBDblClick",
-		{ call SCH_magazinesReloading_fnc_handleListBoxDoubleClick; }
-	];
+	_control = _display displayCtrl _x;
+
+	_control ctrlAddEventHandler ["LBDblClick", { call SCH_magazinesReloading_fnc_handleListBoxDoubleClick; }];
+	_control ctrlAddEventHandler ["LBDrag", { call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }];
 } forEach CRATE_CONTAINER_IDCS;
+
+{
+	_control = _display displayCtrl _x;
+
+	_control ctrlAddEventHandler ["LBDrag", { call SCH_magazinesReloading_fnc_handleListBoxItemDrag; }];
+	_control ctrlAddEventHandler ["LBDrop", { call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }];
+} forEach UNIT_CONTAINER_IDCS;
 
 {
 	(_display displayCtrl _x) ctrlAddEventHandler [
 		"LBDrop",
 		{ call SCH_magazinesReloading_fnc_handleListBoxItemDrop; }
 	];
-} forEach ([IDC_FG_CONTAINER_MARKER, IDC_FG_GROUND_MARKER] + UNIT_CONTAINER_IDCS);
+} forEach MARKER_IDCS;

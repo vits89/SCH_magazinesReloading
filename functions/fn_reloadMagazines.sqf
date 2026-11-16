@@ -36,26 +36,18 @@ uiSleep 0.1;
 if (!([_magazineForInsertingAmmo] call _checkIfMagazineExists)
 	or { !([_magazineForRemovingAmmo, _container] call _checkIfMagazineExists) }) exitWith { };
 
-_magazinesAreCompatible = [
-	_magazineForInsertingAmmo select 0,
-	_magazineForRemovingAmmo select 0
-] call SCH_magazinesReloading_fnc_checkIfMagazinesAreCompatible;
+_magazineCanBeReloaded =
+	[_magazineForInsertingAmmo, _magazineForRemovingAmmo] call SCH_magazinesReloading_fnc_checkIfMagazineCanBeReloaded;
 
-if (!_magazinesAreCompatible) exitWith { };
-
-if ((_magazineForInsertingAmmo isEqualTo (_magazineForRemovingAmmo select [0, count _magazineForInsertingAmmo]))
-	and { (_magazineForInsertingAmmo select 1) == 1 }) exitWith { };
-
-_ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertingAmmo select 0) >> "count");
-
-if (((_magazineForInsertingAmmo select 2) == _ammoCountMax)
-	or { (_magazineForRemovingAmmo select 2) == 0 }) exitWith { };
+if (!_magazineCanBeReloaded) exitWith { };
 
 _checkIfUnitIsAlive = { !(isNull _this) and { (lifeState _this) in ["HEALTHY", "INJURED"] } };
 
 _unit = _display getVariable ["SCH_magazinesReloading_var_unit", objNull];
 
 if (!(_unit call _checkIfUnitIsAlive)) exitWith { };
+
+_ammoCountMax = getNumber (configFile >> "CfgMagazines" >> (_magazineForInsertingAmmo select 0) >> "count");
 
 _ammoCount = (_magazineForInsertingAmmo select 2) + (_magazineForRemovingAmmo select 2);
 
@@ -67,7 +59,7 @@ _ammoCountTotal = (_magazineForInsertingAmmo select 2) + _ammoCount;
 _progress = 0;
 _soundId = -1;
 
-_progressInc = PROGRESS_UPDATE_PERIOD / (SECONDS_PER_ROUND * _ammoCount);
+_progressInc = UI_UPDATE_PERIOD / (_ammoCount * SECONDS_PER_ROUND);
 _timeBeforeSoundPlayback = SECONDS_PER_ROUND - SOUND_DURATION;
 
 localNamespace setVariable ["SCH_magazinesReloading_var_isReloading", true];
@@ -94,8 +86,8 @@ _progressValue ctrlSetStructuredText (parseText (format [
 for "_n" from 1 to _ammoCount do {
 	_timeToPlaySound = time + _timeBeforeSoundPlayback;
 
-	for "_m" from 1 to SECONDS_PER_ROUND / PROGRESS_UPDATE_PERIOD do {
-		uiSleep PROGRESS_UPDATE_PERIOD;
+	for "_m" from 1 to SECONDS_PER_ROUND / UI_UPDATE_PERIOD do {
+		uiSleep UI_UPDATE_PERIOD;
 
 		_progress = _progress + _progressInc;
 

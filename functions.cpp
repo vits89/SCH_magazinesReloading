@@ -12,20 +12,25 @@ class SCH_magazinesReloading
 		};
 		class addGroupEventHandlers { };
 		class addInventoryOpenedEventHandler { };
-		class checkIfMagazinesAreCompatible { };
+		class checkIfMagazineCanBeReloaded { };
+		class createListBoxesItemMarkers { };
 		class createProgressBar { };
 		class getContainer { };
 		class getListBoxItemIndex { };
-		class getMagazineInfo { };
+		class getMagazinesInfo { };
+		class getVisibleListBoxItemPositions { };
 		class lockInventory { };
 		class reloadMagazines { };
 		class removeGroupEventHandlers { };
 		class removeInventoryOpenedEventHandler { };
+		class removeListBoxesItemMarkers { };
 
 		class handleInventoryDisplayRegistered { };
 		class handleInventoryOpened { };
 		class handleListBoxDoubleClick { };
+		class handleListBoxItemDrag { };
 		class handleListBoxItemDrop { };
+		class handleMouseButtonUp { };
 		class handleTabSwitch { };
 	};
 };
