@@ -1,3 +1,8 @@
+v1.5.0
+
+Added: magazine markers, i.e. now you will see which magazines are compatible when drag & drop.
+
+
 v1.4.2
 
 Added: reload sound.
