@@ -11,10 +11,13 @@
 
 #define CONTAINER_IDCS (UNIT_CONTAINER_IDCS + CRATE_CONTAINER_IDCS)
 
+#define MARKER_IDCS [IDC_FG_CONTAINER_MARKER, IDC_FG_GROUND_MARKER]
+
 #define SECONDS_PER_ROUND 0.8
 
 #define SOUND_FILEPATH "\a3\sounds_f\weapons\Other\reload_bolt_1.wss"
 #define SOUND_DURATION 0.6
 
-#define PROGRESS_UPDATE_PERIOD 0.02
 #define PROGRESS_VALUE_FORMAT "<t align='right'>%1 / %2</t>"
+
+#define UI_UPDATE_PERIOD 0.02
